@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Management System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <i class="fas fa-hospital text-indigo-600 text-3xl mr-3"></i>
+                    <span class="text-2xl font-bold text-gray-800">MediCare Hospital</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="/" class="text-indigo-600 hover:text-indigo-800 px-3 py-2 rounded-md font-medium">
+                        <i class="fas fa-home mr-1"></i> Dashboard
+                    </a>
+                    <a href="/patients" class="text-gray-700 hover:text-indigo-600 px-3 py-2 rounded-md font-medium">
+                        <i class="fas fa-user-injured mr-1"></i> Patients
+                    </a>
+                    <a href="/doctors" class="text-gray-700 hover:text-indigo-600 px-3 py-2 rounded-md font-medium">
+                        <i class="fas fa-user-md mr-1"></i> Doctors
+                    </a>
+                    <a href="/appointments" class="text-gray-700 hover:text-indigo-600 px-3 py-2 rounded-md font-medium">
+                        <i class="fas fa-calendar-check mr-1"></i> Appointments
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Welcome Section -->
+        <div class="mb-8">
+            <h1 class="text-4xl font-bold text-gray-800 mb-2">Welcome to MediCare</h1>
+            <p class="text-gray-600">Manage your hospital operations efficiently</p>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <!-- Total Patients -->
+            <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-blue-500 transform hover:scale-105 transition duration-300">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-500 text-sm font-medium uppercase">Total Patients</p>
+                        <p class="text-3xl font-bold text-gray-800 mt-2">{{ total_patients }}</p>
+                    </div>
+                    <div class="bg-blue-100 rounded-full p-4">
+                        <i class="fas fa-user-injured text-blue-500 text-2xl"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Total Doctors -->
+            <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-green-500 transform hover:scale-105 transition duration-300">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-500 text-sm font-medium uppercase">Total Doctors</p>
+                        <p class="text-3xl font-bold text-gray-800 mt-2">{{ total_doctors }}</p>
+                    </div>
+                    <div class="bg-green-100 rounded-full p-4">
+                        <i class="fas fa-user-md text-green-500 text-2xl"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Total Appointments -->
+            <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-purple-500 transform hover:scale-105 transition duration-300">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-500 text-sm font-medium uppercase">Total Appointments</p>
+                        <p class="text-3xl font-bold text-gray-800 mt-2">{{ total_appointments }}</p>
+                    </div>
+                    <div class="bg-purple-100 rounded-full p-4">
+                        <i class="fas fa-calendar-check text-purple-500 text-2xl"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">Quick Actions</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <a href="/add_patient" class="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-6 py-4 rounded-lg hover:from-blue-600 hover:to-blue-700 transition duration-300 text-center font-medium shadow-md">
+                    <i class="fas fa-user-plus mr-2"></i> Add New Patient
+                </a>
+                <a href="/add_doctor" class="bg-gradient-to-r from-green-500 to-green-600 text-white px-6 py-4 rounded-lg hover:from-green-600 hover:to-green-700 transition duration-300 text-center font-medium shadow-md">
+                    <i class="fas fa-user-plus mr-2"></i> Add New Doctor
+                </a>
+                <a href="/add_appointment" class="bg-gradient-to-r from-purple-500 to-purple-600 text-white px-6 py-4 rounded-lg hover:from-purple-600 hover:to-purple-700 transition duration-300 text-center font-medium shadow-md">
+                    <i class="fas fa-calendar-plus mr-2"></i> Schedule Appointment
+                </a>
+            </div>
+        </div>
+
+        <!-- Recent Appointments -->
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">Recent Appointments</h2>
+            <div class="overflow-x-auto">
+                <table class="min-w-full">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Patient</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Doctor</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        {% if recent_appointments %}
+                            {% for appointment in recent_appointments %}
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ appointment.id }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ appointment.patient.first_name }} {{ appointment.patient.last_name }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Dr. {{ appointment.doctor.first_name }} {{ appointment.doctor.last_name }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ appointment.appointment_date }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
+                                        {% if appointment.status == 'scheduled' %}bg-yellow-100 text-yellow-800
+                                        {% elif appointment.status == 'completed' %}bg-green-100 text-green-800
+                                        {% elif appointment.status == 'cancelled' %}bg-red-100 text-red-800
+                                        {% endif %}">
+                                        {{ appointment.status }}
+                                    </span>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr>
+                                <td colspan="5" class="px-6 py-4 text-center text-gray-500">No appointments found</td>
+                            </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white shadow-lg mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <p class="text-center text-gray-600">&copy; 2024 MediCare Hospital. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
